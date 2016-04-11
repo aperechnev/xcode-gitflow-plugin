@@ -34,22 +34,30 @@
 }
 
 - (void)didApplicationFinishLaunchingNotification:(NSNotification *)notification {
-    //removeObserver
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSApplicationDidFinishLaunchingNotification object:nil];
-    
-    // Create menu items, initialize UI, etc.
-    // Sample Menu Item:
-    NSMenuItem *menuItem = [[NSApp mainMenu] itemWithTitle:@"Edit"];
-    if (menuItem) {
-        [[menuItem submenu] addItem:[NSMenuItem separatorItem]];
-        NSMenuItem *actionMenuItem = [[NSMenuItem alloc] initWithTitle:@"Do Action" action:@selector(doMenuAction) keyEquivalent:@""];
-        //[actionMenuItem setKeyEquivalentModifierMask:NSAlphaShiftKeyMask | NSControlKeyMask];
-        [actionMenuItem setTarget:self];
-        [[menuItem submenu] addItem:actionMenuItem];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:NSApplicationDidFinishLaunchingNotification
+                                                  object:nil];
+    [self configureMenuItems];
+}
+
+#pragma mark - Menu configuration
+
+- (void)configureMenuItems {
+    NSMenuItem *sourceControlMenuItem = [[NSApp mainMenu] itemWithTitle:@"Source Control"];
+    if (sourceControlMenuItem) {
+        [[sourceControlMenuItem submenu] addItem:[NSMenuItem separatorItem]];
+        
+        NSMenuItem *gitflowMenuItem = [[NSMenuItem alloc] initWithTitle:@"Git Flow" action:nil keyEquivalent:@""];
+        [[sourceControlMenuItem submenu] addItem:gitflowMenuItem];
+        
+        NSMenuItem *featureStartMenuItem = [[NSMenuItem alloc] initWithTitle:@"Start Feature" action:nil keyEquivalent:@""];
+        featureStartMenuItem.submenu = [[NSMenu alloc] initWithTitle:@"Feature"];
+        [[gitflowMenuItem submenu] addItem:featureStartMenuItem];
     }
 }
 
-// Sample Action, for menu item:
+#pragma mark - Menu actions
+
 - (void)doMenuAction {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText:@"Hello, World"];
