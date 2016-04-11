@@ -8,20 +8,20 @@
 
 #import "gitflow.h"
 
+
 @interface gitflow()
 
 @property (nonatomic, strong, readwrite) NSBundle *bundle;
 @end
 
+
 @implementation gitflow
 
-+ (instancetype)sharedPlugin
-{
++ (instancetype)sharedPlugin {
     return sharedPlugin;
 }
 
-- (id)initWithBundle:(NSBundle *)plugin
-{
+- (id)initWithBundle:(NSBundle *)plugin {
     if (self = [super init]) {
         // reference to plugin's bundle, for resource access
         self.bundle = plugin;
@@ -33,8 +33,7 @@
     return self;
 }
 
-- (void)didApplicationFinishLaunchingNotification:(NSNotification*)noti
-{
+- (void)didApplicationFinishLaunchingNotification:(NSNotification *)notification {
     //removeObserver
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSApplicationDidFinishLaunchingNotification object:nil];
     
@@ -51,15 +50,13 @@
 }
 
 // Sample Action, for menu item:
-- (void)doMenuAction
-{
+- (void)doMenuAction {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText:@"Hello, World"];
     [alert runModal];
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
