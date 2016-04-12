@@ -14,8 +14,13 @@
 
 + (instancetype)sharedInstance;
 
-- (NSArray<NSString *> *)listFeatures;
-- (NSArray<NSString *> *)listReleases;
+@property (nonatomic, strong, readwrite) NSString *projectDirectoryPath;
+
+- (void)gitFlowInit;
 
 - (void)startFeature:(NSString *)featureName;
+- (NSArray<NSString *> *)listFeatures;
+- (void)finishFeature:(NSString *)featureName;
+- (void)publishFeature:(NSString *)featureName;
+- (void)pullFeature:(NSString *)featureName;
 @end

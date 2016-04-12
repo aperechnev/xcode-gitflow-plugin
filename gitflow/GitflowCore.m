@@ -7,6 +7,10 @@
 //
 
 #import "GitflowCore.h"
+#import "ShellCore.h"
+
+
+static NSString * const kGitflowExecutablePath = @"/usr/local/bin/git-flow";
 
 
 @implementation GitflowCore
@@ -21,11 +25,56 @@
     return sGitflowCore;
 }
 
-- (NSArray<NSString *> *)listFeatures {
-    return @[ @"my-feature", @"another-feature" ];
+- (void)gitFlowInit {
+    NSArray *arguments = @[ @"init", @"-fd" ];
+    [[ShellCore sharedInstance] executeCommand:kGitflowExecutablePath
+                                 withArguments:arguments
+                                   inDirectory:self.projectDirectoryPath];
 }
 
 - (void)startFeature:(NSString *)featureName {
+    ShellCore *shellCore = [ShellCore sharedInstance];
+    
+    NSArray *arguments = @[ @"feature", @"start", featureName ];
+    [shellCore executeCommand:kGitflowExecutablePath
+                withArguments:arguments
+                  inDirectory:self.projectDirectoryPath];
+}
+
+- (NSArray<NSString *> *)listFeatures {
+    ShellCore *shellCore = [ShellCore sharedInstance];
+    
+    NSArray *arguments = @[ @"feature" ];
+    NSString *shellOutput = [shellCore executeCommand:kGitflowExecutablePath
+                                        withArguments:arguments
+                                          inDirectory:self.projectDirectoryPath];
+    NSArray *branchRawList = [shellOutput componentsSeparatedByString:@"\n"];
+    
+    NSMutableArray *branchList = [[NSMutableArray alloc] init];
+    NSCharacterSet *charactersToTrim = [NSCharacterSet characterSetWithCharactersInString:@" *"];
+    for (NSString *rawBranch in branchRawList) {
+        NSString *branch = [rawBranch stringByTrimmingCharactersInSet:charactersToTrim];
+        [branchList addObject:branch];
+    }
+    
+    return branchList.copy;
+}
+
+- (void)finishFeature:(NSString *)featureName {
+    ShellCore *shellCore = [ShellCore sharedInstance];
+    
+    NSArray *arguments = @[ @"feature", @"finish", featureName ];
+    [shellCore executeCommand:kGitflowExecutablePath
+                withArguments:arguments
+                  inDirectory:self.projectDirectoryPath];
+}
+
+- (void)publishFeature:(NSString *)featureName {
+    // TODO: Feature publishing
+}
+
+- (void)pullFeature:(NSString *)featureName {
+    // TODO: Feature pulling
 }
 
 - (NSString *)projectDirectory {
