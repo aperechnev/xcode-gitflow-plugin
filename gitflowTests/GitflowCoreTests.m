@@ -98,6 +98,33 @@
     }
 }
 
+- (void)testFeatureFinishing {
+    NSString *testFeature = @"test-feature";
+    NSString *testBranch = [NSString stringWithFormat:@"feature/%@", testFeature];
+    [self.testableGitflowCore gitFlowInit];
+    [self.testableGitflowCore startFeature:testFeature];
+    
+    [self logBranches];
+    
+    NSString *branchesOutput = [[ShellCore sharedInstance] executeCommand:@"git"
+                                                            withArguments:@[ @"branch" ]
+                                                              inDirectory:self.testableGitflowCore.projectDirectoryPath];
+    XCTAssertTrue([branchesOutput containsString:testBranch]);
+    XCTAssertTrue([branchesOutput containsString:@"master"]);
+    XCTAssertTrue([branchesOutput containsString:@"develop"]);
+    
+    [self.testableGitflowCore finishFeature:testFeature];
+    
+    [self logBranches];
+    
+    branchesOutput = [[ShellCore sharedInstance] executeCommand:@"git"
+                                                  withArguments:@[ @"branch" ]
+                                                    inDirectory:self.testableGitflowCore.projectDirectoryPath];
+    XCTAssertFalse([branchesOutput containsString:testBranch]);
+    XCTAssertTrue([branchesOutput containsString:@"master"]);
+    XCTAssertTrue([branchesOutput containsString:@"develop"]);
+}
+
 - (void)logBranches {
     NSString *branchList = [[ShellCore sharedInstance] executeCommand:@"git"
                                                         withArguments:@[ @"branch" ]

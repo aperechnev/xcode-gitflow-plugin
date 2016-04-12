@@ -60,6 +60,15 @@ static NSString * const kGitflowExecutablePath = @"/usr/local/bin/git-flow";
     return branchList.copy;
 }
 
+- (void)finishFeature:(NSString *)featureName {
+    ShellCore *shellCore = [ShellCore sharedInstance];
+    
+    NSArray *arguments = @[ @"feature", @"finish", featureName ];
+    [shellCore executeCommand:kGitflowExecutablePath
+                withArguments:arguments
+                  inDirectory:self.projectDirectoryPath];
+}
+
 - (NSString *)projectDirectory {
     NSArray *workspaceWindowControllers = [NSClassFromString(@"IDEWorkspaceWindowController") valueForKey:@"workspaceWindowControllers"];
     

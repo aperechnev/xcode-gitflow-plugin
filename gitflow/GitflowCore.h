@@ -20,6 +20,5 @@
 
 - (void)startFeature:(NSString *)featureName;
 - (NSArray<NSString *> *)listFeatures;
-
-- (NSArray<NSString *> *)listReleases;
+- (void)finishFeature:(NSString *)featureName;
 @end
