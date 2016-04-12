@@ -44,20 +44,17 @@ static NSString * const kGitflowExecutablePath = @"/usr/local/bin/git-flow";
 - (NSArray<NSString *> *)listFeatures {
     ShellCore *shellCore = [ShellCore sharedInstance];
     
-    NSString *command = @"git";
-    NSArray *arguments = @[ @"branch" ];
-    NSString *shellOutput = [shellCore executeCommand:command
+    NSArray *arguments = @[ @"feature" ];
+    NSString *shellOutput = [shellCore executeCommand:kGitflowExecutablePath
                                         withArguments:arguments
                                           inDirectory:self.projectDirectoryPath];
     NSArray *branchRawList = [shellOutput componentsSeparatedByString:@"\n"];
     
     NSMutableArray *branchList = [[NSMutableArray alloc] init];
+    NSCharacterSet *charactersToTrim = [NSCharacterSet characterSetWithCharactersInString:@" *"];
     for (NSString *rawBranch in branchRawList) {
-        NSString *branch = [rawBranch stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" *"]];
-        if ([branch containsString:@"feature/"]) {
-            branch = [branch stringByReplacingOccurrencesOfString:@"feature/" withString:@""];
-            [branchList addObject:branch];
-        }
+        NSString *branch = [rawBranch stringByTrimmingCharactersInSet:charactersToTrim];
+        [branchList addObject:branch];
     }
     
     return branchList.copy;

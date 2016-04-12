@@ -84,11 +84,14 @@
 
 - (void)testFeatureListing {
     NSArray<NSString *> *testBranchList = @[ @"new-function", @"another-function" ];
-    NSArray<NSString *> *branchList = [self.testableGitflowCore listFeatures];
     
-    for (NSString *branch in branchList) {
-        NSLog(@"Found branch named %@", branch);
-    }
+    [self.testableGitflowCore gitFlowInit];
+    [self.testableGitflowCore startFeature:testBranchList[0]];
+    [self.testableGitflowCore startFeature:testBranchList[1]];
+    
+    [self logBranches];
+    
+    NSArray<NSString *> *branchList = [self.testableGitflowCore listFeatures];
     
     for (NSString *testBranch in testBranchList) {
         XCTAssertTrue([branchList containsObject:testBranch]);
