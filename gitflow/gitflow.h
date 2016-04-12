@@ -8,6 +8,7 @@
 
 #import <AppKit/AppKit.h>
 
+
 @class gitflow;
 
 static gitflow *sharedPlugin;
@@ -17,5 +18,5 @@ static gitflow *sharedPlugin;
 + (instancetype)sharedPlugin;
 - (id)initWithBundle:(NSBundle *)plugin;
 
-@property (nonatomic, strong, readonly) NSBundle* bundle;
+@property (nonatomic, strong, readonly) NSBundle *bundle;
 @end
