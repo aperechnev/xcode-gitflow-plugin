@@ -7,6 +7,7 @@
 //
 
 #import "gitflow.h"
+#import "GitflowCore.h"
 
 
 @interface gitflow()
@@ -50,13 +51,30 @@
         NSMenuItem *gitflowMenuItem = [[NSMenuItem alloc] initWithTitle:@"Git Flow" action:nil keyEquivalent:@""];
         [[sourceControlMenuItem submenu] addItem:gitflowMenuItem];
         
-        NSMenuItem *featureStartMenuItem = [[NSMenuItem alloc] initWithTitle:@"Start Feature" action:nil keyEquivalent:@""];
-        featureStartMenuItem.submenu = [[NSMenu alloc] initWithTitle:@"Feature"];
-        [[gitflowMenuItem submenu] addItem:featureStartMenuItem];
+        NSMenu *gitflowMenu = [[NSMenu alloc] init];
+        
+        NSMenuItem *startFeatureMenuItem = [[NSMenuItem alloc] initWithTitle:@"Start Feature"
+                                                                      action:@selector(doStartFeature)
+                                                               keyEquivalent:@""];
+        startFeatureMenuItem.target = self;
+        [gitflowMenu addItem:startFeatureMenuItem];
+        
+        for (NSString *feature in [GitflowCore sharedInstance].listFeatures) {
+            [gitflowMenu addItemWithTitle:feature action:nil keyEquivalent:@""];
+        }
+        
+        [gitflowMenu addItem:[NSMenuItem separatorItem]];
+        [gitflowMenu addItemWithTitle:@"Start Release" action:nil keyEquivalent:@""];
+        [gitflowMenu addItemWithTitle:@"Finish Release" action:nil keyEquivalent:@""];
+        gitflowMenuItem.submenu = gitflowMenu;
     }
 }
 
 #pragma mark - Menu actions
+
+- (void)doStartFeature {
+    [[GitflowCore sharedInstance] startFeature:@"my feature"];
+}
 
 - (void)doMenuAction {
     NSAlert *alert = [[NSAlert alloc] init];

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		322F97D01CBC284D00F48E3B /* GitflowCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 322F97CF1CBC284D00F48E3B /* GitflowCore.m */; };
+		329863C91CBC655E006D61BF /* ShellCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 329863C81CBC655E006D61BF /* ShellCore.m */; };
+		329863E51CBC695D006D61BF /* gitflowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 329863D01CBC6641006D61BF /* gitflowTests.m */; };
+		329863E61CBC695F006D61BF /* ShellCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 329863D61CBC6665006D61BF /* ShellCoreTests.m */; };
+		329863E91CBC6B94006D61BF /* ShellCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 329863C81CBC655E006D61BF /* ShellCore.m */; };
 		CE5B22491CBC114900055218 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5B22481CBC114900055218 /* AppKit.framework */; };
 		CE5B224B1CBC114900055218 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5B224A1CBC114900055218 /* Foundation.framework */; };
 		CE5B224F1CBC114900055218 /* gitflow.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = CE5B224E1CBC114900055218 /* gitflow.xcscheme */; };
@@ -14,7 +19,25 @@
 		CE5B22551CBC114900055218 /* NSObject_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5B22541CBC114900055218 /* NSObject_Extension.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		329863E71CBC6B71006D61BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE5B223D1CBC114900055218 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE5B22441CBC114900055218;
+			remoteInfo = gitflow;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		322F97CE1CBC284D00F48E3B /* GitflowCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GitflowCore.h; sourceTree = "<group>"; };
+		322F97CF1CBC284D00F48E3B /* GitflowCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GitflowCore.m; sourceTree = "<group>"; };
+		329863C71CBC655E006D61BF /* ShellCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShellCore.h; sourceTree = "<group>"; };
+		329863C81CBC655E006D61BF /* ShellCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShellCore.m; sourceTree = "<group>"; };
+		329863D01CBC6641006D61BF /* gitflowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gitflowTests.m; sourceTree = "<group>"; };
+		329863D21CBC6641006D61BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		329863D61CBC6665006D61BF /* ShellCoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShellCoreTests.m; sourceTree = "<group>"; };
+		329863DD1CBC693D006D61BF /* gitflowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gitflowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5B22451CBC114900055218 /* gitflow.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gitflow.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5B22481CBC114900055218 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		CE5B224A1CBC114900055218 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -27,6 +50,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		329863DA1CBC693D006D61BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE5B22431CBC114900055218 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -39,10 +69,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		329863CF1CBC6641006D61BF /* gitflowTests */ = {
+			isa = PBXGroup;
+			children = (
+				329863D01CBC6641006D61BF /* gitflowTests.m */,
+				329863D61CBC6665006D61BF /* ShellCoreTests.m */,
+				329863D21CBC6641006D61BF /* Info.plist */,
+			);
+			path = gitflowTests;
+			sourceTree = "<group>";
+		};
+		329863D81CBC671C006D61BF /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				329863C71CBC655E006D61BF /* ShellCore.h */,
+				329863C81CBC655E006D61BF /* ShellCore.m */,
+				322F97CE1CBC284D00F48E3B /* GitflowCore.h */,
+				322F97CF1CBC284D00F48E3B /* GitflowCore.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
 		CE5B223C1CBC114900055218 = {
 			isa = PBXGroup;
 			children = (
 				CE5B224C1CBC114900055218 /* gitflow */,
+				329863CF1CBC6641006D61BF /* gitflowTests */,
 				CE5B22471CBC114900055218 /* Frameworks */,
 				CE5B22461CBC114900055218 /* Products */,
 			);
@@ -52,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				CE5B22451CBC114900055218 /* gitflow.xcplugin */,
+				329863DD1CBC693D006D61BF /* gitflowTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +123,7 @@
 			children = (
 				CE5B22501CBC114900055218 /* gitflow.h */,
 				CE5B22511CBC114900055218 /* gitflow.m */,
+				329863D81CBC671C006D61BF /* Core */,
 				CE5B22531CBC114900055218 /* NSObject_Extension.h */,
 				CE5B22541CBC114900055218 /* NSObject_Extension.m */,
 				CE5B22561CBC114900055218 /* Info.plist */,
@@ -89,6 +143,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		329863DC1CBC693D006D61BF /* gitflowTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 329863E21CBC693D006D61BF /* Build configuration list for PBXNativeTarget "gitflowTests" */;
+			buildPhases = (
+				329863D91CBC693D006D61BF /* Sources */,
+				329863DA1CBC693D006D61BF /* Frameworks */,
+				329863DB1CBC693D006D61BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				329863E81CBC6B71006D61BF /* PBXTargetDependency */,
+			);
+			name = gitflowTests;
+			productName = gitflowTests;
+			productReference = 329863DD1CBC693D006D61BF /* gitflowTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CE5B22441CBC114900055218 /* gitflow */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE5B22591CBC114900055218 /* Build configuration list for PBXNativeTarget "gitflow" */;
@@ -115,6 +187,9 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Alex Krzyżanowski";
 				TargetAttributes = {
+					329863DC1CBC693D006D61BF = {
+						CreatedOnToolsVersion = 7.3;
+					};
 					CE5B22441CBC114900055218 = {
 						CreatedOnToolsVersion = 7.3;
 					};
@@ -133,11 +208,19 @@
 			projectRoot = "";
 			targets = (
 				CE5B22441CBC114900055218 /* gitflow */,
+				329863DC1CBC693D006D61BF /* gitflowTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		329863DB1CBC693D006D61BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE5B22421CBC114900055218 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -149,18 +232,66 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		329863D91CBC693D006D61BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				329863E91CBC6B94006D61BF /* ShellCore.m in Sources */,
+				329863E51CBC695D006D61BF /* gitflowTests.m in Sources */,
+				329863E61CBC695F006D61BF /* ShellCoreTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE5B22411CBC114900055218 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				322F97D01CBC284D00F48E3B /* GitflowCore.m in Sources */,
 				CE5B22521CBC114900055218 /* gitflow.m in Sources */,
 				CE5B22551CBC114900055218 /* NSObject_Extension.m in Sources */,
+				329863C91CBC655E006D61BF /* ShellCore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		329863E81CBC6B71006D61BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE5B22441CBC114900055218 /* gitflow */;
+			targetProxy = 329863E71CBC6B71006D61BF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		329863E31CBC693D006D61BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = gitflowTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.akrzyzanowski.gitflowTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = "";
+			};
+			name = Debug;
+		};
+		329863E41CBC693D006D61BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = gitflowTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = com.akrzyzanowski.gitflowTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = "";
+			};
+			name = Release;
+		};
 		CE5B22571CBC114900055218 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -269,6 +400,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		329863E21CBC693D006D61BF /* Build configuration list for PBXNativeTarget "gitflowTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				329863E31CBC693D006D61BF /* Debug */,
+				329863E41CBC693D006D61BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		CE5B22401CBC114900055218 /* Build configuration list for PBXProject "gitflow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -285,6 +424,7 @@
 				CE5B225B1CBC114900055218 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
