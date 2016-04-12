@@ -50,13 +50,10 @@
 }
 
 - (void)testShellCommandExecution {
-    NSString * const kTestOutput = @".\n\
-..\n\
-file001.txt\n\
-file002.txt\n";
-    NSString * const kTestCommand = @"ls";
-    NSString * const kTestArgument = @"-a";
-    NSString * const kExecutionDirectory = @"/Users/aperechnev/Projects/xcode-gitflow-plugin/test_content";
+    NSString * const kTestOutput = @"test\n";
+    NSString * const kTestCommand = @"echo";
+    NSString * const kTestArgument = @"'test'";
+    NSString * const kExecutionDirectory = @"~";
     
     NSArray<NSString *> *arguments = @[ kTestArgument ];
     
