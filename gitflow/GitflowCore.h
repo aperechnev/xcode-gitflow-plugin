@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong, readwrite) NSString *projectDirectoryPath;
 
+- (void)gitFlowInit;
+
 - (void)startFeature:(NSString *)featureName;
 - (NSArray<NSString *> *)listFeatures;
 

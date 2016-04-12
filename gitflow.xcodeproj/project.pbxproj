@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		322F97D01CBC284D00F48E3B /* GitflowCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 322F97CF1CBC284D00F48E3B /* GitflowCore.m */; };
 		329863C91CBC655E006D61BF /* ShellCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 329863C81CBC655E006D61BF /* ShellCore.m */; };
-		329863E51CBC695D006D61BF /* gitflowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 329863D01CBC6641006D61BF /* gitflowTests.m */; };
 		329863E61CBC695F006D61BF /* ShellCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 329863D61CBC6665006D61BF /* ShellCoreTests.m */; };
 		329863E91CBC6B94006D61BF /* ShellCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 329863C81CBC655E006D61BF /* ShellCore.m */; };
 		CE112EC71CBD3AF100B2891E /* GitflowCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE112EC61CBD3AF100B2891E /* GitflowCoreTests.m */; };
@@ -36,7 +35,6 @@
 		322F97CF1CBC284D00F48E3B /* GitflowCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GitflowCore.m; sourceTree = "<group>"; };
 		329863C71CBC655E006D61BF /* ShellCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShellCore.h; sourceTree = "<group>"; };
 		329863C81CBC655E006D61BF /* ShellCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShellCore.m; sourceTree = "<group>"; };
-		329863D01CBC6641006D61BF /* gitflowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = gitflowTests.m; sourceTree = "<group>"; };
 		329863D21CBC6641006D61BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		329863D61CBC6665006D61BF /* ShellCoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShellCoreTests.m; sourceTree = "<group>"; };
 		329863DD1CBC693D006D61BF /* gitflowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gitflowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,7 +73,6 @@
 		329863CF1CBC6641006D61BF /* gitflowTests */ = {
 			isa = PBXGroup;
 			children = (
-				329863D01CBC6641006D61BF /* gitflowTests.m */,
 				329863D61CBC6665006D61BF /* ShellCoreTests.m */,
 				CE112EC61CBD3AF100B2891E /* GitflowCoreTests.m */,
 				329863D21CBC6641006D61BF /* Info.plist */,
@@ -243,7 +240,6 @@
 				CE112EC81CBD3C6A00B2891E /* GitflowCore.m in Sources */,
 				329863E91CBC6B94006D61BF /* ShellCore.m in Sources */,
 				CE112EC71CBD3AF100B2891E /* GitflowCoreTests.m in Sources */,
-				329863E51CBC695D006D61BF /* gitflowTests.m in Sources */,
 				329863E61CBC695F006D61BF /* ShellCoreTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,7 +9,7 @@
 #import "ShellCore.h"
 
 
-static NSString * const kShellPath = @"/bin/sh";
+static NSString * const kShellPath = @"/bin/bash";
 static NSString * const kShellConsoleArgument = @"-c";
 
 

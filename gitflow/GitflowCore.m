@@ -10,6 +10,9 @@
 #import "ShellCore.h"
 
 
+static NSString * const kGitflowExecutablePath = @"/usr/local/bin/git-flow";
+
+
 @implementation GitflowCore
 
 + (instancetype)sharedInstance {
@@ -22,12 +25,18 @@
     return sGitflowCore;
 }
 
+- (void)gitFlowInit {
+    NSArray *arguments = @[ @"init", @"-fd" ];
+    [[ShellCore sharedInstance] executeCommand:kGitflowExecutablePath
+                                 withArguments:arguments
+                                   inDirectory:self.projectDirectoryPath];
+}
+
 - (void)startFeature:(NSString *)featureName {
     ShellCore *shellCore = [ShellCore sharedInstance];
     
-    NSString *command = @"git";
-    NSArray *arguments = @[ @"flow", @"feature", @"start", featureName ];
-    [shellCore executeCommand:command
+    NSArray *arguments = @[ @"feature", @"start", featureName ];
+    [shellCore executeCommand:kGitflowExecutablePath
                 withArguments:arguments
                   inDirectory:self.projectDirectoryPath];
 }
