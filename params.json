@@ -1,0 +1,6 @@
+{
+  "name": "Xcode-gitflow-plugin",
+  "tagline": "Git-flow plugin for Xcode",
+  "body": "# xcode-gitflow-plugin\r\n\r\n[![Build Status](https://travis-ci.org/alexkrzyzanowski/xcode-gitflow-plugin.svg?branch=develop)](https://travis-ci.org/alexkrzyzanowski/xcode-gitflow-plugin) [![codecov.io](https://codecov.io/github/alexkrzyzanowski/xcode-gitflow-plugin/coverage.svg?branch=develop)](https://codecov.io/github/alexkrzyzanowski/xcode-gitflow-plugin?branch=develop)\r\n\r\nGit-flow plugin for Xcode\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
