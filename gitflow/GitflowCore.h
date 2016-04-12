@@ -14,8 +14,10 @@
 
 + (instancetype)sharedInstance;
 
-- (NSArray<NSString *> *)listFeatures;
-- (NSArray<NSString *> *)listReleases;
+@property (nonatomic, strong, readwrite) NSString *projectDirectoryPath;
 
 - (void)startFeature:(NSString *)featureName;
+- (NSArray<NSString *> *)listFeatures;
+
+- (NSArray<NSString *> *)listReleases;
 @end

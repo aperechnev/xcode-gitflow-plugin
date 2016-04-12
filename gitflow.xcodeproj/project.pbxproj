@@ -12,6 +12,8 @@
 		329863E51CBC695D006D61BF /* gitflowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 329863D01CBC6641006D61BF /* gitflowTests.m */; };
 		329863E61CBC695F006D61BF /* ShellCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 329863D61CBC6665006D61BF /* ShellCoreTests.m */; };
 		329863E91CBC6B94006D61BF /* ShellCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 329863C81CBC655E006D61BF /* ShellCore.m */; };
+		CE112EC71CBD3AF100B2891E /* GitflowCoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE112EC61CBD3AF100B2891E /* GitflowCoreTests.m */; };
+		CE112EC81CBD3C6A00B2891E /* GitflowCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 322F97CF1CBC284D00F48E3B /* GitflowCore.m */; };
 		CE5B22491CBC114900055218 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5B22481CBC114900055218 /* AppKit.framework */; };
 		CE5B224B1CBC114900055218 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5B224A1CBC114900055218 /* Foundation.framework */; };
 		CE5B224F1CBC114900055218 /* gitflow.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = CE5B224E1CBC114900055218 /* gitflow.xcscheme */; };
@@ -38,6 +40,7 @@
 		329863D21CBC6641006D61BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		329863D61CBC6665006D61BF /* ShellCoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShellCoreTests.m; sourceTree = "<group>"; };
 		329863DD1CBC693D006D61BF /* gitflowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gitflowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE112EC61CBD3AF100B2891E /* GitflowCoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GitflowCoreTests.m; sourceTree = "<group>"; };
 		CE5B22451CBC114900055218 /* gitflow.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gitflow.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5B22481CBC114900055218 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		CE5B224A1CBC114900055218 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -74,6 +77,7 @@
 			children = (
 				329863D01CBC6641006D61BF /* gitflowTests.m */,
 				329863D61CBC6665006D61BF /* ShellCoreTests.m */,
+				CE112EC61CBD3AF100B2891E /* GitflowCoreTests.m */,
 				329863D21CBC6641006D61BF /* Info.plist */,
 			);
 			path = gitflowTests;
@@ -236,7 +240,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE112EC81CBD3C6A00B2891E /* GitflowCore.m in Sources */,
 				329863E91CBC6B94006D61BF /* ShellCore.m in Sources */,
+				CE112EC71CBD3AF100B2891E /* GitflowCoreTests.m in Sources */,
 				329863E51CBC695D006D61BF /* gitflowTests.m in Sources */,
 				329863E61CBC695F006D61BF /* ShellCoreTests.m in Sources */,
 			);
@@ -407,6 +413,7 @@
 				329863E41CBC693D006D61BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CE5B22401CBC114900055218 /* Build configuration list for PBXProject "gitflow" */ = {
 			isa = XCConfigurationList;

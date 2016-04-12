@@ -7,6 +7,7 @@
 //
 
 #import "GitflowCore.h"
+#import "ShellCore.h"
 
 
 @implementation GitflowCore
@@ -21,11 +22,36 @@
     return sGitflowCore;
 }
 
-- (NSArray<NSString *> *)listFeatures {
-    return @[ @"my-feature", @"another-feature" ];
+- (void)startFeature:(NSString *)featureName {
+    ShellCore *shellCore = [ShellCore sharedInstance];
+    
+    NSString *command = @"git";
+    NSArray *arguments = @[ @"flow", @"feature", @"start", featureName ];
+    [shellCore executeCommand:command
+                withArguments:arguments
+                  inDirectory:self.projectDirectoryPath];
 }
 
-- (void)startFeature:(NSString *)featureName {
+- (NSArray<NSString *> *)listFeatures {
+    ShellCore *shellCore = [ShellCore sharedInstance];
+    
+    NSString *command = @"git";
+    NSArray *arguments = @[ @"branch" ];
+    NSString *shellOutput = [shellCore executeCommand:command
+                                        withArguments:arguments
+                                          inDirectory:self.projectDirectoryPath];
+    NSArray *branchRawList = [shellOutput componentsSeparatedByString:@"\n"];
+    
+    NSMutableArray *branchList = [[NSMutableArray alloc] init];
+    for (NSString *rawBranch in branchRawList) {
+        NSString *branch = [rawBranch stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" *"]];
+        if ([branch containsString:@"feature/"]) {
+            branch = [branch stringByReplacingOccurrencesOfString:@"feature/" withString:@""];
+            [branchList addObject:branch];
+        }
+    }
+    
+    return branchList.copy;
 }
 
 - (NSString *)projectDirectory {
