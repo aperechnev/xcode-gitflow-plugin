@@ -69,6 +69,14 @@ static NSString * const kGitflowExecutablePath = @"/usr/local/bin/git-flow";
                   inDirectory:self.projectDirectoryPath];
 }
 
+- (void)publishFeature:(NSString *)featureName {
+    // TODO: Feature publishing
+}
+
+- (void)pullFeature:(NSString *)featureName {
+    // TODO: Feature pulling
+}
+
 - (NSString *)projectDirectory {
     NSArray *workspaceWindowControllers = [NSClassFromString(@"IDEWorkspaceWindowController") valueForKey:@"workspaceWindowControllers"];
     
