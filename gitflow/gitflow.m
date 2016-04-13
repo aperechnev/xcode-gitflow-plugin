@@ -64,35 +64,55 @@
 #pragma mark - NSMenuDelegate
 
 - (void)menuWillOpen:(NSMenu *)menu {
-    [self reloadFeatureListToMenu:menu];
+    [self reloadEntitiesToMenu:menu];
 }
 
 #pragma mark - Internal methods
 
-- (void)reloadFeatureListToMenu:(NSMenu *)menu {
+- (void)reloadEntitiesToMenu:(NSMenu *)menu {
     [menu removeAllItems];
     
-    NSMenuItem *startFeatureMenuItem = [[NSMenuItem alloc] initWithTitle:@"Start feature"
-                                                                  action:@selector(startFeatureItemClicked)
-                                                           keyEquivalent:@""];
-    startFeatureMenuItem.target = self;
-    [menu addItem:startFeatureMenuItem];
+    [self configureMenuItemsForEntity:kGitflowEntityFeature
+                              forMenu:menu
+                            withStart:@selector(startFeatureItemClicked)
+                            andFinish:@selector(finishFeatureItemClicked:)];
+    
+    [self configureMenuItemsForEntity:kGitflowEntityRelease
+                              forMenu:menu
+                            withStart:@selector(startReleaseItemClicked)
+                            andFinish:@selector(finishReleaseItemClicked:)];
+    
+    [self configureMenuItemsForEntity:kGitflowEntityHotfix
+                              forMenu:menu
+                            withStart:@selector(startHotfixItemClicked)
+                            andFinish:@selector(finishHotfixItemClicked:)];
+}
+
+- (void)configureMenuItemsForEntity:(NSString *)entity forMenu:(NSMenu *)menu withStart:(SEL)start andFinish:(SEL)finish {
     [menu addItem:[NSMenuItem separatorItem]];
     
-    for (NSString *feature in [[GitflowCore sharedInstance] listEntity:kGitflowEntityFeature]) {
-        NSMenuItem *featureMenuItem = [[NSMenuItem alloc] initWithTitle:feature
-                                                                 action:nil
+    NSString *startEntityMenuItemTitle = [NSString stringWithFormat:@"Start %@", entity.capitalizedString];
+    
+    NSMenuItem *startEntityMenuItem = [[NSMenuItem alloc] initWithTitle:startEntityMenuItemTitle
+                                                                 action:start
                                                           keyEquivalent:@""];
+    startEntityMenuItem.target = self;
+    [menu addItem:startEntityMenuItem];
+    
+    for (NSString *i_entity in [[GitflowCore sharedInstance] listEntity:entity]) {
+        NSMenuItem *entityMenuItem = [[NSMenuItem alloc] initWithTitle:i_entity
+                                                                action:nil
+                                                         keyEquivalent:@""];
         
-        NSMenu *featureSubmenu = [[NSMenu alloc] init];
-        NSMenuItem *finishFeatureMenuItem = [[NSMenuItem alloc] initWithTitle:@"Finish"
-                                                                       action:@selector(finishFeatureItemClicked:)
-                                                                keyEquivalent:@""];
-        finishFeatureMenuItem.target = self;
-        [featureSubmenu addItem:finishFeatureMenuItem];
-        featureMenuItem.submenu = featureSubmenu;
+        NSMenu *entitySubmenu = [[NSMenu alloc] init];
+        NSMenuItem *finishEntityMenuItem = [[NSMenuItem alloc] initWithTitle:@"Finish"
+                                                                      action:finish
+                                                               keyEquivalent:@""];
+        finishEntityMenuItem.target = self;
+        [entitySubmenu addItem:finishEntityMenuItem];
+        entityMenuItem.submenu = entitySubmenu;
         
-        [menu addItem:featureMenuItem];
+        [menu addItem:entityMenuItem];
     }
 }
 
@@ -126,6 +146,68 @@
         [[GitflowCore sharedInstance] doAction:kGitflowActionFinish
                                     withEntity:kGitflowEntityFeature
                                       withName:featureName];
+    }
+}
+
+- (void)startReleaseItemClicked {
+    NSAlert *alert = [[NSAlert alloc] init];
+    
+    [alert addButtonWithTitle:@"OK"];
+    [alert addButtonWithTitle:@"Cancel"];
+    
+    alert.messageText = @"Please enter a name for new release";
+    
+    NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
+    [input setStringValue:@""];
+    [alert setAccessoryView:input];
+    
+    NSInteger button = [alert runModal];
+    if (button == NSAlertFirstButtonReturn) {
+        [input validateEditing];
+        NSString *releaseName = [input stringValue];
+        [[GitflowCore sharedInstance] doAction:kGitflowActionStart
+                                    withEntity:kGitflowEntityRelease
+                                      withName:releaseName];
+    }
+}
+
+- (void)finishReleaseItemClicked:(NSMenuItem *)sender {
+    NSString *releaseName = sender.parentItem.title;
+    if (releaseName != nil) {
+        [[GitflowCore sharedInstance] doAction:kGitflowActionFinish
+                                    withEntity:kGitflowEntityRelease
+                                      withName:releaseName];
+    }
+}
+
+- (void)startHotfixItemClicked {
+    NSAlert *alert = [[NSAlert alloc] init];
+    
+    [alert addButtonWithTitle:@"OK"];
+    [alert addButtonWithTitle:@"Cancel"];
+    
+    alert.messageText = @"Please enter a name for new hotfix";
+    
+    NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
+    [input setStringValue:@""];
+    [alert setAccessoryView:input];
+    
+    NSInteger button = [alert runModal];
+    if (button == NSAlertFirstButtonReturn) {
+        [input validateEditing];
+        NSString *hotfixName = [input stringValue];
+        [[GitflowCore sharedInstance] doAction:kGitflowActionStart
+                                    withEntity:kGitflowEntityHotfix
+                                      withName:hotfixName];
+    }
+}
+
+- (void)finishHotfixItemClicked:(NSMenuItem *)sender {
+    NSString *hotfixName = sender.parentItem.title;
+    if (hotfixName != nil) {
+        [[GitflowCore sharedInstance] doAction:kGitflowActionFinish
+                                    withEntity:kGitflowEntityHotfix
+                                      withName:hotfixName];
     }
 }
 
