@@ -56,6 +56,9 @@ static NSString * const kGitflowExecutablePath = @"/usr/local/bin/git-flow";
     NSCharacterSet *charactersToTrim = [NSCharacterSet characterSetWithCharactersInString:@" *"];
     for (NSString *rawBranch in branchRawList) {
         NSString *branch = [rawBranch stringByTrimmingCharactersInSet:charactersToTrim];
+        if (branch == nil || branch.length == 0) {
+            continue;
+        }
         [branchList addObject:branch];
     }
     
