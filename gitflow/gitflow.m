@@ -79,7 +79,7 @@
     [menu addItem:startFeatureMenuItem];
     [menu addItem:[NSMenuItem separatorItem]];
     
-    for (NSString *feature in [GitflowCore sharedInstance].listFeatures) {
+    for (NSString *feature in [[GitflowCore sharedInstance] listEntity:kGitflowEntityFeature]) {
         NSMenuItem *featureMenuItem = [[NSMenuItem alloc] initWithTitle:feature
                                                                  action:nil
                                                           keyEquivalent:@""];
@@ -114,14 +114,18 @@
     if (button == NSAlertFirstButtonReturn) {
         [input validateEditing];
         NSString *featureName = [input stringValue];
-        [[GitflowCore sharedInstance] startFeature:featureName];
+        [[GitflowCore sharedInstance] doAction:kGitflowActionStart
+                                    withEntity:kGitflowEntityFeature
+                                      withName:featureName];
     }
 }
 
 - (void)finishFeatureItemClicked:(NSMenuItem *)sender {
     NSString *featureName = sender.parentItem.title;
     if (featureName != nil) {
-        [[GitflowCore sharedInstance] finishFeature:featureName];
+        [[GitflowCore sharedInstance] doAction:kGitflowActionFinish
+                                    withEntity:kGitflowEntityFeature
+                                      withName:featureName];
     }
 }
 
