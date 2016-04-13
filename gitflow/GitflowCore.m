@@ -77,7 +77,9 @@ static NSString * const kGitflowExecutablePath = @"/usr/local/bin/git-flow";
     // TODO: Feature pulling
 }
 
-- (NSString *)projectDirectory {
+#pragma mark - Setters & Getters
+
+- (NSString *)projectDirectoryPath {
     NSArray *workspaceWindowControllers = [NSClassFromString(@"IDEWorkspaceWindowController") valueForKey:@"workspaceWindowControllers"];
     
     id workSpace;
