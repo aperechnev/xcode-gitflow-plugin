@@ -15,6 +15,8 @@ static NSString * const kGitflowExecutablePath = @"/usr/local/bin/git-flow";
 
 @implementation GitflowCore
 
+@synthesize projectDirectoryPath = _projectDirectoryPath;
+
 + (instancetype)sharedInstance {
     static GitflowCore * sGitflowCore = nil;
     @synchronized (self) {
@@ -80,6 +82,10 @@ static NSString * const kGitflowExecutablePath = @"/usr/local/bin/git-flow";
 #pragma mark - Setters & Getters
 
 - (NSString *)projectDirectoryPath {
+    if (_projectDirectoryPath != nil) {
+        return _projectDirectoryPath;
+    }
+    
     NSArray *workspaceWindowControllers = [NSClassFromString(@"IDEWorkspaceWindowController") valueForKey:@"workspaceWindowControllers"];
     
     id workSpace;
