@@ -13,7 +13,7 @@
 
 static gitflow *sharedPlugin;
 
-@interface gitflow : NSObject
+@interface gitflow : NSObject <NSMenuDelegate>
 
 + (instancetype)sharedPlugin;
 - (id)initWithBundle:(NSBundle *)plugin;

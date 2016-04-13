@@ -45,45 +45,84 @@
 
 - (void)configureMenuItems {
     NSMenuItem *sourceControlMenuItem = [[NSApp mainMenu] itemWithTitle:@"Source Control"];
-    if (sourceControlMenuItem) {
+    if (sourceControlMenuItem != nil) {
         [[sourceControlMenuItem submenu] addItem:[NSMenuItem separatorItem]];
         
         NSMenuItem *gitflowMenuItem = [[NSMenuItem alloc] initWithTitle:@"Git Flow" action:nil keyEquivalent:@""];
         [[sourceControlMenuItem submenu] addItem:gitflowMenuItem];
         
         NSMenu *gitflowMenu = [[NSMenu alloc] init];
-        
-        NSMenuItem *startFeatureMenuItem = [[NSMenuItem alloc] initWithTitle:@"Start Feature"
-                                                                      action:@selector(doStartFeature)
-                                                               keyEquivalent:@""];
-        startFeatureMenuItem.target = self;
-        [gitflowMenu addItem:startFeatureMenuItem];
-        
-        for (NSString *feature in [GitflowCore sharedInstance].listFeatures) {
-            [gitflowMenu addItemWithTitle:feature action:nil keyEquivalent:@""];
-        }
-        
-        [gitflowMenu addItem:[NSMenuItem separatorItem]];
-        [gitflowMenu addItemWithTitle:@"Start Release" action:nil keyEquivalent:@""];
-        [gitflowMenu addItemWithTitle:@"Finish Release" action:nil keyEquivalent:@""];
+        gitflowMenu.delegate = self;
         gitflowMenuItem.submenu = gitflowMenu;
+    }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - NSMenuDelegate
+
+- (void)menuWillOpen:(NSMenu *)menu {
+    [self reloadFeatureListToMenu:menu];
+}
+
+#pragma mark - Internal methods
+
+- (void)reloadFeatureListToMenu:(NSMenu *)menu {
+    [menu removeAllItems];
+    
+    NSMenuItem *startFeatureMenuItem = [[NSMenuItem alloc] initWithTitle:@"Start feature"
+                                                                  action:@selector(startFeatureItemClicked)
+                                                           keyEquivalent:@""];
+    startFeatureMenuItem.target = self;
+    [menu addItem:startFeatureMenuItem];
+    [menu addItem:[NSMenuItem separatorItem]];
+    
+    for (NSString *feature in [GitflowCore sharedInstance].listFeatures) {
+        NSMenuItem *featureMenuItem = [[NSMenuItem alloc] initWithTitle:feature
+                                                                 action:nil
+                                                          keyEquivalent:@""];
+        
+        NSMenu *featureSubmenu = [[NSMenu alloc] init];
+        NSMenuItem *finishFeatureMenuItem = [[NSMenuItem alloc] initWithTitle:@"Finish"
+                                                                       action:@selector(finishFeatureItemClicked:)
+                                                                keyEquivalent:@""];
+        finishFeatureMenuItem.target = self;
+        [featureSubmenu addItem:finishFeatureMenuItem];
+        featureMenuItem.submenu = featureSubmenu;
+        
+        [menu addItem:featureMenuItem];
     }
 }
 
 #pragma mark - Menu actions
 
-- (void)doStartFeature {
-    [[GitflowCore sharedInstance] startFeature:@"my feature"];
-}
-
-- (void)doMenuAction {
+- (void)startFeatureItemClicked {
     NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:@"Hello, World"];
-    [alert runModal];
+    
+    [alert addButtonWithTitle:@"OK"];
+    [alert addButtonWithTitle:@"Cancel"];
+    
+    alert.messageText = @"Please enter a name for new feature";
+    
+    NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
+    [input setStringValue:@""];
+    [alert setAccessoryView:input];
+    
+    NSInteger button = [alert runModal];
+    if (button == NSAlertFirstButtonReturn) {
+        [input validateEditing];
+        NSString *featureName = [input stringValue];
+        [[GitflowCore sharedInstance] startFeature:featureName];
+    }
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+- (void)finishFeatureItemClicked:(NSMenuItem *)sender {
+    NSString *featureName = sender.parentItem.title;
+    if (featureName != nil) {
+        [[GitflowCore sharedInstance] finishFeature:featureName];
+    }
 }
 
 @end
