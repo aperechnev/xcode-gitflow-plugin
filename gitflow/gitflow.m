@@ -199,13 +199,22 @@
 }
 
 - (void)finishHotfixItemClicked:(NSMenuItem *)sender {
-    NSString *hotfixName = sender.parentItem.title;
-    if (hotfixName != nil) {
-        [[GitflowCore sharedInstance] doAction:kGitflowActionFinish
-                                    withEntity:kGitflowEntityHotfix
-                                      withName:hotfixName
-                          additionalParameters:nil];
+    NSString *hotifxName = sender.parentItem.title;
+    if (hotifxName == nil) {
+        return;
     }
+    
+    NSString *tagMessage = [self askInputStringWithMessage:@"Please enter message for the new tag"];
+    if (tagMessage == nil) {
+        return;
+    }
+    
+    NSArray *additionalParameters = @[ @"-m", tagMessage ];
+    
+    [[GitflowCore sharedInstance] doAction:kGitflowActionFinish
+                                withEntity:kGitflowEntityHotfix
+                                  withName:hotifxName
+                      additionalParameters:additionalParameters];
 }
 
 @end
