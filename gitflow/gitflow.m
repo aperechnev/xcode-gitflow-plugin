@@ -136,7 +136,8 @@
         NSString *featureName = [input stringValue];
         [[GitflowCore sharedInstance] doAction:kGitflowActionStart
                                     withEntity:kGitflowEntityFeature
-                                      withName:featureName];
+                                      withName:featureName
+                          additionalParameters:nil];
     }
 }
 
@@ -145,7 +146,8 @@
     if (featureName != nil) {
         [[GitflowCore sharedInstance] doAction:kGitflowActionFinish
                                     withEntity:kGitflowEntityFeature
-                                      withName:featureName];
+                                      withName:featureName
+                          additionalParameters:nil];
     }
 }
 
@@ -167,7 +169,8 @@
         NSString *releaseName = [input stringValue];
         [[GitflowCore sharedInstance] doAction:kGitflowActionStart
                                     withEntity:kGitflowEntityRelease
-                                      withName:releaseName];
+                                      withName:releaseName
+                          additionalParameters:nil];
     }
 }
 
@@ -176,7 +179,8 @@
     if (releaseName != nil) {
         [[GitflowCore sharedInstance] doAction:kGitflowActionFinish
                                     withEntity:kGitflowEntityRelease
-                                      withName:releaseName];
+                                      withName:releaseName
+                          additionalParameters:nil];
     }
 }
 
@@ -198,7 +202,8 @@
         NSString *hotfixName = [input stringValue];
         [[GitflowCore sharedInstance] doAction:kGitflowActionStart
                                     withEntity:kGitflowEntityHotfix
-                                      withName:hotfixName];
+                                      withName:hotfixName
+                          additionalParameters:nil];
     }
 }
 
@@ -207,7 +212,8 @@
     if (hotfixName != nil) {
         [[GitflowCore sharedInstance] doAction:kGitflowActionFinish
                                     withEntity:kGitflowEntityHotfix
-                                      withName:hotfixName];
+                                      withName:hotfixName
+                          additionalParameters:nil];
     }
 }
 
