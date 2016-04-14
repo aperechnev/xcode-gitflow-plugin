@@ -61,13 +61,23 @@ static NSString * const kGitflowExecutablePath = @"/usr/local/bin/git-flow";
 - (void)doAction:(NSString *)action withEntity:(NSString *)entity withName:(NSString *)name additionalParameters:(NSArray<NSString *> *)parameters {
     ShellCore *shellCore = [ShellCore sharedInstance];
     
+    NSArray *arguments = [self shellArgumentsForAction:action
+                                             forEntity:entity
+                                              withName:name
+                              withAdditionalParameters:parameters];
+    
+    [shellCore executeCommand:kGitflowExecutablePath
+                withArguments:arguments
+                  inDirectory:self.projectDirectoryPath];
+}
+
+- (NSArray *)shellArgumentsForAction:(NSString *)action forEntity:(NSString *)entity withName:(NSString *)name withAdditionalParameters:(NSArray<NSString *> *)parameters {
     NSMutableArray *arguments = [[NSMutableArray alloc] initWithArray:@[ entity, action ]];
     if (parameters != nil) {
         [arguments addObjectsFromArray:parameters];
     }
     [arguments addObject:name];
-    
-    [shellCore executeCommand:kGitflowExecutablePath withArguments:arguments inDirectory:self.projectDirectoryPath];
+    return arguments.copy;
 }
 
 #pragma mark - Setters & Getters

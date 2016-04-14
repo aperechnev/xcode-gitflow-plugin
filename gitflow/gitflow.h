@@ -11,7 +11,9 @@
 
 @class gitflow;
 
+
 static gitflow *sharedPlugin;
+
 
 @interface gitflow : NSObject <NSMenuDelegate>
 
@@ -19,4 +21,6 @@ static gitflow *sharedPlugin;
 - (id)initWithBundle:(NSBundle *)plugin;
 
 @property (nonatomic, strong, readonly) NSBundle *bundle;
+
+- (void)menuWillOpen:(NSMenu *)menu;
 @end

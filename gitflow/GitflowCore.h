@@ -34,4 +34,10 @@ static NSString * const kGitflowActionPull = @"pull";
       withEntity:(NSString *)entity
         withName:(NSString *)name
 additionalParameters:(NSArray<NSString *>*)parameters;
+
+- (NSArray *)shellArgumentsForAction:(NSString *)action
+                           forEntity:(NSString *)entity
+                            withName:(NSString *)name
+            withAdditionalParameters:(NSArray<NSString *> *)parameters;
+
 @end
