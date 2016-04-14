@@ -18,6 +18,8 @@
 		CE5B224F1CBC114900055218 /* gitflow.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = CE5B224E1CBC114900055218 /* gitflow.xcscheme */; };
 		CE5B22521CBC114900055218 /* gitflow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5B22511CBC114900055218 /* gitflow.m */; };
 		CE5B22551CBC114900055218 /* NSObject_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5B22541CBC114900055218 /* NSObject_Extension.m */; };
+		CEA869431CBFFDFF0063B49D /* gitflowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA869421CBFFDFF0063B49D /* gitflowTests.m */; };
+		CEA869441CC001CE0063B49D /* gitflow.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5B22511CBC114900055218 /* gitflow.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,7 @@
 		CE5B22531CBC114900055218 /* NSObject_Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSObject_Extension.h; sourceTree = "<group>"; };
 		CE5B22541CBC114900055218 /* NSObject_Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSObject_Extension.m; sourceTree = "<group>"; };
 		CE5B22561CBC114900055218 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEA869421CBFFDFF0063B49D /* gitflowTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gitflowTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +76,7 @@
 		329863CF1CBC6641006D61BF /* gitflowTests */ = {
 			isa = PBXGroup;
 			children = (
+				CEA869421CBFFDFF0063B49D /* gitflowTests.m */,
 				329863D61CBC6665006D61BF /* ShellCoreTests.m */,
 				CE112EC61CBD3AF100B2891E /* GitflowCoreTests.m */,
 				329863D21CBC6641006D61BF /* Info.plist */,
@@ -239,7 +243,9 @@
 			files = (
 				CE112EC81CBD3C6A00B2891E /* GitflowCore.m in Sources */,
 				329863E91CBC6B94006D61BF /* ShellCore.m in Sources */,
+				CEA869431CBFFDFF0063B49D /* gitflowTests.m in Sources */,
 				CE112EC71CBD3AF100B2891E /* GitflowCoreTests.m in Sources */,
+				CEA869441CC001CE0063B49D /* gitflow.m in Sources */,
 				329863E61CBC695F006D61BF /* ShellCoreTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
