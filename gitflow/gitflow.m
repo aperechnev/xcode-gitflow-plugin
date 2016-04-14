@@ -116,15 +116,13 @@
     }
 }
 
-#pragma mark - Menu actions
-
-- (void)startFeatureItemClicked {
+- (NSString *)askInputStringWithMessage:(NSString *)message {
     NSAlert *alert = [[NSAlert alloc] init];
     
     [alert addButtonWithTitle:@"OK"];
     [alert addButtonWithTitle:@"Cancel"];
     
-    alert.messageText = @"Please enter a name for new feature";
+    alert.messageText = message;
     
     NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
     [input setStringValue:@""];
@@ -133,7 +131,17 @@
     NSInteger button = [alert runModal];
     if (button == NSAlertFirstButtonReturn) {
         [input validateEditing];
-        NSString *featureName = [input stringValue];
+        return [input stringValue];
+    }
+    
+    return nil;
+}
+
+#pragma mark - Menu actions
+
+- (void)startFeatureItemClicked {
+    NSString *featureName = [self askInputStringWithMessage:@"Please enter a name for new feature"];
+    if (featureName != nil) {
         [[GitflowCore sharedInstance] doAction:kGitflowActionStart
                                     withEntity:kGitflowEntityFeature
                                       withName:featureName
@@ -152,21 +160,8 @@
 }
 
 - (void)startReleaseItemClicked {
-    NSAlert *alert = [[NSAlert alloc] init];
-    
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
-    
-    alert.messageText = @"Please enter a name for new release";
-    
-    NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
-    [input setStringValue:@""];
-    [alert setAccessoryView:input];
-    
-    NSInteger button = [alert runModal];
-    if (button == NSAlertFirstButtonReturn) {
-        [input validateEditing];
-        NSString *releaseName = [input stringValue];
+    NSString *releaseName = [self askInputStringWithMessage:@"Please enter a name for new release"];
+    if (releaseName != nil) {
         [[GitflowCore sharedInstance] doAction:kGitflowActionStart
                                     withEntity:kGitflowEntityRelease
                                       withName:releaseName
@@ -176,30 +171,26 @@
 
 - (void)finishReleaseItemClicked:(NSMenuItem *)sender {
     NSString *releaseName = sender.parentItem.title;
-    if (releaseName != nil) {
-        [[GitflowCore sharedInstance] doAction:kGitflowActionFinish
-                                    withEntity:kGitflowEntityRelease
-                                      withName:releaseName
-                          additionalParameters:nil];
+    if (releaseName == nil) {
+        return;
     }
+    
+    NSString *tagMessage = [self askInputStringWithMessage:@"Please enter message for the new tag"];
+    if (tagMessage == nil) {
+        return;
+    }
+    
+    NSArray *additionalParameters = @[ @"-m", tagMessage ];
+    
+    [[GitflowCore sharedInstance] doAction:kGitflowActionFinish
+                                withEntity:kGitflowEntityRelease
+                                  withName:releaseName
+                      additionalParameters:additionalParameters];
 }
 
 - (void)startHotfixItemClicked {
-    NSAlert *alert = [[NSAlert alloc] init];
-    
-    [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
-    
-    alert.messageText = @"Please enter a name for new hotfix";
-    
-    NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
-    [input setStringValue:@""];
-    [alert setAccessoryView:input];
-    
-    NSInteger button = [alert runModal];
-    if (button == NSAlertFirstButtonReturn) {
-        [input validateEditing];
-        NSString *hotfixName = [input stringValue];
+    NSString *hotfixName = [self askInputStringWithMessage:@"Please enter a name for new hotfix"];
+    if (hotfixName != nil) {
         [[GitflowCore sharedInstance] doAction:kGitflowActionStart
                                     withEntity:kGitflowEntityHotfix
                                       withName:hotfixName
