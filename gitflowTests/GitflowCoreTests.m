@@ -66,6 +66,22 @@
     XCTAssertTrue([branchesOutput containsString:@"develop"]);
 }
 
+- (void)testShellArgumentsComposition {
+    NSString *testAction = @"start";
+    NSString *testEntity = @"release";
+    NSString *testName = @"testRelease";
+    NSArray *testParameters = @[ @"-m", @"some-message" ];
+    
+    NSArray *testShellArguments = @[ testEntity, testAction, testParameters[0], testParameters[1], testName ];
+    
+    NSArray *shellArguments = [self.testableGitflowCore shellArgumentsForAction:testAction
+                                                                      forEntity:testEntity
+                                                                       withName:testName
+                                                       withAdditionalParameters:testParameters];
+    
+    XCTAssertEqualObjects(testShellArguments, shellArguments);
+}
+
 - (void)testFeatureStarting {
     NSString *testFeature = @"test-feature";
     NSString *testBranch = [NSString stringWithFormat:@"feature/%@", testFeature];
