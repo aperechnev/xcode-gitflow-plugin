@@ -72,7 +72,8 @@
     [self.testableGitflowCore gitFlowInit];
     [self.testableGitflowCore doAction:kGitflowActionStart
                             withEntity:kGitflowEntityFeature
-                              withName:testFeature];
+                              withName:testFeature
+                  additionalParameters:nil];
     
     [self logBranches];
     
@@ -90,10 +91,12 @@
     [self.testableGitflowCore gitFlowInit];
     [self.testableGitflowCore doAction:kGitflowActionStart
                             withEntity:kGitflowEntityFeature
-                              withName:testBranchList[0]];
+                              withName:testBranchList[0]
+                  additionalParameters:nil];
     [self.testableGitflowCore doAction:kGitflowActionStart
                             withEntity:kGitflowEntityFeature
-                              withName:testBranchList[1]];
+                              withName:testBranchList[1]
+                  additionalParameters:nil];
     
     [self logBranches];
     
@@ -110,7 +113,8 @@
     [self.testableGitflowCore gitFlowInit];
     [self.testableGitflowCore doAction:kGitflowActionStart
                             withEntity:kGitflowEntityFeature
-                              withName:testFeature];
+                              withName:testFeature
+                  additionalParameters:nil];
     
     [self logBranches];
     
@@ -123,7 +127,8 @@
     
     [self.testableGitflowCore doAction:kGitflowActionFinish
                             withEntity:kGitflowEntityFeature
-                              withName:testFeature];
+                              withName:testFeature
+                  additionalParameters:nil];
     
     [self logBranches];
     

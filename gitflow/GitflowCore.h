@@ -29,5 +29,9 @@ static NSString * const kGitflowActionPull = @"pull";
 - (void)gitFlowInit;
 
 - (NSArray<NSString *> *)listEntity:(NSString *)entity;
-- (void)doAction:(NSString *)action withEntity:(NSString *)entity withName:(NSString *)name;
+
+- (void)doAction:(NSString *)action
+      withEntity:(NSString *)entity
+        withName:(NSString *)name
+additionalParameters:(NSArray<NSString *>*)parameters;
 @end
