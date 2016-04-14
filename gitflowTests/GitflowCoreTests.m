@@ -70,7 +70,10 @@
     NSString *testFeature = @"test-feature";
     NSString *testBranch = [NSString stringWithFormat:@"feature/%@", testFeature];
     [self.testableGitflowCore gitFlowInit];
-    [self.testableGitflowCore startFeature:testFeature];
+    [self.testableGitflowCore doAction:kGitflowActionStart
+                            withEntity:kGitflowEntityFeature
+                              withName:testFeature
+                  additionalParameters:nil];
     
     [self logBranches];
     
@@ -86,12 +89,18 @@
     NSArray<NSString *> *testBranchList = @[ @"new-function", @"another-function" ];
     
     [self.testableGitflowCore gitFlowInit];
-    [self.testableGitflowCore startFeature:testBranchList[0]];
-    [self.testableGitflowCore startFeature:testBranchList[1]];
+    [self.testableGitflowCore doAction:kGitflowActionStart
+                            withEntity:kGitflowEntityFeature
+                              withName:testBranchList[0]
+                  additionalParameters:nil];
+    [self.testableGitflowCore doAction:kGitflowActionStart
+                            withEntity:kGitflowEntityFeature
+                              withName:testBranchList[1]
+                  additionalParameters:nil];
     
     [self logBranches];
     
-    NSArray<NSString *> *branchList = [self.testableGitflowCore listFeatures];
+    NSArray<NSString *> *branchList = [self.testableGitflowCore listEntity:kGitflowEntityFeature];
     
     for (NSString *testBranch in testBranchList) {
         XCTAssertTrue([branchList containsObject:testBranch]);
@@ -102,7 +111,10 @@
     NSString *testFeature = @"test-feature";
     NSString *testBranch = [NSString stringWithFormat:@"feature/%@", testFeature];
     [self.testableGitflowCore gitFlowInit];
-    [self.testableGitflowCore startFeature:testFeature];
+    [self.testableGitflowCore doAction:kGitflowActionStart
+                            withEntity:kGitflowEntityFeature
+                              withName:testFeature
+                  additionalParameters:nil];
     
     [self logBranches];
     
@@ -113,7 +125,10 @@
     XCTAssertTrue([branchesOutput containsString:@"master"]);
     XCTAssertTrue([branchesOutput containsString:@"develop"]);
     
-    [self.testableGitflowCore finishFeature:testFeature];
+    [self.testableGitflowCore doAction:kGitflowActionFinish
+                            withEntity:kGitflowEntityFeature
+                              withName:testFeature
+                  additionalParameters:nil];
     
     [self logBranches];
     

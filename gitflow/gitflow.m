@@ -64,47 +64,65 @@
 #pragma mark - NSMenuDelegate
 
 - (void)menuWillOpen:(NSMenu *)menu {
-    [self reloadFeatureListToMenu:menu];
+    [self reloadEntitiesToMenu:menu];
 }
 
 #pragma mark - Internal methods
 
-- (void)reloadFeatureListToMenu:(NSMenu *)menu {
+- (void)reloadEntitiesToMenu:(NSMenu *)menu {
     [menu removeAllItems];
     
-    NSMenuItem *startFeatureMenuItem = [[NSMenuItem alloc] initWithTitle:@"Start feature"
-                                                                  action:@selector(startFeatureItemClicked)
-                                                           keyEquivalent:@""];
-    startFeatureMenuItem.target = self;
-    [menu addItem:startFeatureMenuItem];
+    [self configureMenuItemsForEntity:kGitflowEntityFeature
+                              forMenu:menu
+                            withStart:@selector(startFeatureItemClicked)
+                            andFinish:@selector(finishFeatureItemClicked:)];
+    
+    [self configureMenuItemsForEntity:kGitflowEntityRelease
+                              forMenu:menu
+                            withStart:@selector(startReleaseItemClicked)
+                            andFinish:@selector(finishReleaseItemClicked:)];
+    
+    [self configureMenuItemsForEntity:kGitflowEntityHotfix
+                              forMenu:menu
+                            withStart:@selector(startHotfixItemClicked)
+                            andFinish:@selector(finishHotfixItemClicked:)];
+}
+
+- (void)configureMenuItemsForEntity:(NSString *)entity forMenu:(NSMenu *)menu withStart:(SEL)start andFinish:(SEL)finish {
     [menu addItem:[NSMenuItem separatorItem]];
     
-    for (NSString *feature in [GitflowCore sharedInstance].listFeatures) {
-        NSMenuItem *featureMenuItem = [[NSMenuItem alloc] initWithTitle:feature
-                                                                 action:nil
+    NSString *startEntityMenuItemTitle = [NSString stringWithFormat:@"Start %@", entity.capitalizedString];
+    
+    NSMenuItem *startEntityMenuItem = [[NSMenuItem alloc] initWithTitle:startEntityMenuItemTitle
+                                                                 action:start
                                                           keyEquivalent:@""];
+    startEntityMenuItem.target = self;
+    [menu addItem:startEntityMenuItem];
+    
+    for (NSString *i_entity in [[GitflowCore sharedInstance] listEntity:entity]) {
+        NSMenuItem *entityMenuItem = [[NSMenuItem alloc] initWithTitle:i_entity
+                                                                action:nil
+                                                         keyEquivalent:@""];
         
-        NSMenu *featureSubmenu = [[NSMenu alloc] init];
-        NSMenuItem *finishFeatureMenuItem = [[NSMenuItem alloc] initWithTitle:@"Finish"
-                                                                       action:@selector(finishFeatureItemClicked:)
-                                                                keyEquivalent:@""];
-        finishFeatureMenuItem.target = self;
-        [featureSubmenu addItem:finishFeatureMenuItem];
-        featureMenuItem.submenu = featureSubmenu;
+        NSMenu *entitySubmenu = [[NSMenu alloc] init];
+        NSMenuItem *finishEntityMenuItem = [[NSMenuItem alloc] initWithTitle:@"Finish"
+                                                                      action:finish
+                                                               keyEquivalent:@""];
+        finishEntityMenuItem.target = self;
+        [entitySubmenu addItem:finishEntityMenuItem];
+        entityMenuItem.submenu = entitySubmenu;
         
-        [menu addItem:featureMenuItem];
+        [menu addItem:entityMenuItem];
     }
 }
 
-#pragma mark - Menu actions
-
-- (void)startFeatureItemClicked {
+- (NSString *)askInputStringWithMessage:(NSString *)message {
     NSAlert *alert = [[NSAlert alloc] init];
     
     [alert addButtonWithTitle:@"OK"];
     [alert addButtonWithTitle:@"Cancel"];
     
-    alert.messageText = @"Please enter a name for new feature";
+    alert.messageText = message;
     
     NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
     [input setStringValue:@""];
@@ -113,15 +131,80 @@
     NSInteger button = [alert runModal];
     if (button == NSAlertFirstButtonReturn) {
         [input validateEditing];
-        NSString *featureName = [input stringValue];
-        [[GitflowCore sharedInstance] startFeature:featureName];
+        return [input stringValue];
+    }
+    
+    return nil;
+}
+
+#pragma mark - Menu actions
+
+- (void)startFeatureItemClicked {
+    NSString *featureName = [self askInputStringWithMessage:@"Please enter a name for new feature"];
+    if (featureName != nil) {
+        [[GitflowCore sharedInstance] doAction:kGitflowActionStart
+                                    withEntity:kGitflowEntityFeature
+                                      withName:featureName
+                          additionalParameters:nil];
     }
 }
 
 - (void)finishFeatureItemClicked:(NSMenuItem *)sender {
     NSString *featureName = sender.parentItem.title;
     if (featureName != nil) {
-        [[GitflowCore sharedInstance] finishFeature:featureName];
+        [[GitflowCore sharedInstance] doAction:kGitflowActionFinish
+                                    withEntity:kGitflowEntityFeature
+                                      withName:featureName
+                          additionalParameters:nil];
+    }
+}
+
+- (void)startReleaseItemClicked {
+    NSString *releaseName = [self askInputStringWithMessage:@"Please enter a name for new release"];
+    if (releaseName != nil) {
+        [[GitflowCore sharedInstance] doAction:kGitflowActionStart
+                                    withEntity:kGitflowEntityRelease
+                                      withName:releaseName
+                          additionalParameters:nil];
+    }
+}
+
+- (void)finishReleaseItemClicked:(NSMenuItem *)sender {
+    NSString *releaseName = sender.parentItem.title;
+    if (releaseName == nil) {
+        return;
+    }
+    
+    NSString *tagMessage = [self askInputStringWithMessage:@"Please enter message for the new tag"];
+    if (tagMessage == nil) {
+        return;
+    }
+    
+    NSArray *additionalParameters = @[ @"-m", tagMessage ];
+    
+    [[GitflowCore sharedInstance] doAction:kGitflowActionFinish
+                                withEntity:kGitflowEntityRelease
+                                  withName:releaseName
+                      additionalParameters:additionalParameters];
+}
+
+- (void)startHotfixItemClicked {
+    NSString *hotfixName = [self askInputStringWithMessage:@"Please enter a name for new hotfix"];
+    if (hotfixName != nil) {
+        [[GitflowCore sharedInstance] doAction:kGitflowActionStart
+                                    withEntity:kGitflowEntityHotfix
+                                      withName:hotfixName
+                          additionalParameters:nil];
+    }
+}
+
+- (void)finishHotfixItemClicked:(NSMenuItem *)sender {
+    NSString *hotfixName = sender.parentItem.title;
+    if (hotfixName != nil) {
+        [[GitflowCore sharedInstance] doAction:kGitflowActionFinish
+                                    withEntity:kGitflowEntityHotfix
+                                      withName:hotfixName
+                          additionalParameters:nil];
     }
 }
 

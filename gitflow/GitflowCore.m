@@ -34,19 +34,12 @@ static NSString * const kGitflowExecutablePath = @"/usr/local/bin/git-flow";
                                    inDirectory:self.projectDirectoryPath];
 }
 
-- (void)startFeature:(NSString *)featureName {
-    ShellCore *shellCore = [ShellCore sharedInstance];
-    
-    NSArray *arguments = @[ @"feature", @"start", featureName ];
-    [shellCore executeCommand:kGitflowExecutablePath
-                withArguments:arguments
-                  inDirectory:self.projectDirectoryPath];
-}
+#pragma mark - Entity Management
 
-- (NSArray<NSString *> *)listFeatures {
+- (NSArray<NSString *> *)listEntity:(NSString *)entity {
     ShellCore *shellCore = [ShellCore sharedInstance];
     
-    NSArray *arguments = @[ @"feature" ];
+    NSArray *arguments = @[ entity ];
     NSString *shellOutput = [shellCore executeCommand:kGitflowExecutablePath
                                         withArguments:arguments
                                           inDirectory:self.projectDirectoryPath];
@@ -65,21 +58,16 @@ static NSString * const kGitflowExecutablePath = @"/usr/local/bin/git-flow";
     return branchList.copy;
 }
 
-- (void)finishFeature:(NSString *)featureName {
+- (void)doAction:(NSString *)action withEntity:(NSString *)entity withName:(NSString *)name additionalParameters:(NSArray<NSString *> *)parameters {
     ShellCore *shellCore = [ShellCore sharedInstance];
     
-    NSArray *arguments = @[ @"feature", @"finish", featureName ];
-    [shellCore executeCommand:kGitflowExecutablePath
-                withArguments:arguments
-                  inDirectory:self.projectDirectoryPath];
-}
-
-- (void)publishFeature:(NSString *)featureName {
-    // TODO: Feature publishing
-}
-
-- (void)pullFeature:(NSString *)featureName {
-    // TODO: Feature pulling
+    NSMutableArray *arguments = [[NSMutableArray alloc] initWithArray:@[ entity, action ]];
+    if (parameters != nil) {
+        [arguments addObjectsFromArray:parameters];
+    }
+    [arguments addObject:name];
+    
+    [shellCore executeCommand:kGitflowExecutablePath withArguments:arguments inDirectory:self.projectDirectoryPath];
 }
 
 #pragma mark - Setters & Getters

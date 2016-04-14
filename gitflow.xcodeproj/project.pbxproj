@@ -373,6 +373,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = "0.2-alpha";
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = "$(HOME)";
 				INFOPLIST_FILE = gitflow/Info.plist;
@@ -380,6 +381,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.akrzyzanowski.gitflow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = xcplugin;
 			};
 			name = Debug;
@@ -388,6 +390,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = "0.2-alpha";
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = "$(HOME)";
 				INFOPLIST_FILE = gitflow/Info.plist;
@@ -395,6 +398,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.akrzyzanowski.gitflow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = xcplugin;
 			};
 			name = Release;

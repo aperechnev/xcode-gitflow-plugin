@@ -10,6 +10,16 @@
 #import <AppKit/AppKit.h>
 
 
+static NSString * const kGitflowEntityFeature = @"feature";
+static NSString * const kGitflowEntityRelease = @"release";
+static NSString * const kGitflowEntityHotfix = @"hotfix";
+
+static NSString * const kGitflowActionStart = @"start";
+static NSString * const kGitflowActionFinish = @"finish";
+static NSString * const kGitflowActionPublish = @"publish";
+static NSString * const kGitflowActionPull = @"pull";
+
+
 @interface GitflowCore : NSObject
 
 + (instancetype)sharedInstance;
@@ -18,9 +28,10 @@
 
 - (void)gitFlowInit;
 
-- (void)startFeature:(NSString *)featureName;
-- (NSArray<NSString *> *)listFeatures;
-- (void)finishFeature:(NSString *)featureName;
-- (void)publishFeature:(NSString *)featureName;
-- (void)pullFeature:(NSString *)featureName;
+- (NSArray<NSString *> *)listEntity:(NSString *)entity;
+
+- (void)doAction:(NSString *)action
+      withEntity:(NSString *)entity
+        withName:(NSString *)name
+additionalParameters:(NSArray<NSString *>*)parameters;
 @end
