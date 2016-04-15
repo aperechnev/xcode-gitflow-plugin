@@ -5,6 +5,8 @@
 
 Git-flow plugin for Xcode
 
+![Screenshot](https://raw.githubusercontent.com/alexkrzyzanowski/xcode-gitflow-plugin/develop/screenshot.png)
+
 ## Code Coverage
 
 ![codecov.io](https://codecov.io/github/alexkrzyzanowski/xcode-gitflow-plugin/branch.svg?branch=develop)
