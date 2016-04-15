@@ -13,7 +13,7 @@ Git-flow plugin for Xcode
 
 ## Support plugin
 
-If you want to say "thank you", you can tipsend me a tip using PayPal. [![PayPal][2]][1]
+If you want to say "thank you", you can send me a tip using PayPal. [![PayPal][2]][1]
 
 [1]: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=alex%2ekrzyzanowski%40icloud%2ecom&lc=US&item_name=Gitflow%20plugin%20for%20XCode&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 
