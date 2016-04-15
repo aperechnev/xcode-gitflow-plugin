@@ -7,6 +7,10 @@ Git-flow plugin for Xcode
 
 ![Screenshot](https://raw.githubusercontent.com/alexkrzyzanowski/xcode-gitflow-plugin/develop/screenshot.png)
 
+## Installation
+
+The easiest way to start using the plugin is to install it via [Alcatraz](http://alcatraz.io).
+
 ## Code Coverage
 
 ![codecov.io](https://codecov.io/github/alexkrzyzanowski/xcode-gitflow-plugin/branch.svg?branch=develop)
