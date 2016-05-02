@@ -72,6 +72,11 @@
 - (void)reloadEntitiesToMenu:(NSMenu *)menu {
     [menu removeAllItems];
     
+    if ([GitflowCore sharedInstance].projectDirectoryPath == nil) {
+        [menu addItemWithTitle:@"Git repository not found" action:nil keyEquivalent:@""];
+        return;
+    }
+    
     [self configureMenuItemsForEntity:kGitflowEntityFeature
                               forMenu:menu
                             withStart:@selector(startFeatureItemClicked)
