@@ -37,12 +37,17 @@ static NSString * const kGitflowExecutablePath = @"/usr/local/bin/git-flow";
 #pragma mark - Entity Management
 
 - (NSArray<NSString *> *)listEntity:(NSString *)entity {
+    NSString *projectDirectoryPath = self.projectDirectoryPath;
+    if (projectDirectoryPath == nil) {
+        return @[];
+    }
+    
     ShellCore *shellCore = [ShellCore sharedInstance];
     
     NSArray *arguments = @[ entity ];
     NSString *shellOutput = [shellCore executeCommand:kGitflowExecutablePath
                                         withArguments:arguments
-                                          inDirectory:self.projectDirectoryPath];
+                                          inDirectory:projectDirectoryPath];
     NSArray *branchRawList = [shellOutput componentsSeparatedByString:@"\n"];
     
     NSMutableArray *branchList = [[NSMutableArray alloc] init];
@@ -97,8 +102,20 @@ static NSString * const kGitflowExecutablePath = @"/usr/local/bin/git-flow";
         }
     }
     
+    if (workSpace == nil) {
+        return nil;
+    }
+    
     NSString *workspacePath = [[workSpace valueForKey:@"representingFilePath"] valueForKey:@"_pathString"];
+    if (workspacePath == nil) {
+        return nil;
+    }
+    
     NSURL *url = [[NSURL alloc] initWithString:workspacePath];
+    if (url == nil) {
+        return nil;
+    }
+    
     return url.URLByDeletingLastPathComponent.absoluteString;
 }
 
